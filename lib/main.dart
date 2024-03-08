@@ -1,5 +1,6 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:bottom_navigation_bar/CustomBottomNavigationBar/Custom2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,98 +15,95 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class NewWidget extends StatelessWidget {
-  const NewWidget({
+class NewWidget extends StatefulWidget {
+NewWidget({
     super.key,
   });
+
+  @override
+  State<NewWidget> createState() => _NewWidgetState();
+}
+
+class _NewWidgetState extends State<NewWidget> {
+  List<Widget>widgets=[MyWidget(),MyWidget2(),MyWidget3()];
+
+  int index=0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurple,
-      bottomNavigationBar: CurvedNavigationBar(
-        //Geçiş Animasyonunu belirleyen özellik
-        //animationCurve: Curves.elasticIn,
-        //Animasyon geçiş hızını ayarlayan özellik
-        //animationDuration: Duration(milliseconds: 300),
-        //Enbaştaki seçili sayfa(icon) durumunu belirleyen özelliktir.
-        index: 1,
-        //Seçme butonunun rengini değiştiren özellik
-        //buttonBackgroundColor: Colors.blue,
-        //appbar yüküseliğini belirleyen özellik
-        //height: 20,
-        onTap: (value) {
-          print(value);
-        },
-        color: Colors.deepPurpleAccent,
-        backgroundColor: Colors.deepPurple,
-        items: <Widget>[
-          Icon(Icons.add),
-          Icon(Icons.person),
-          Icon(Icons.settings)
-        ],
+      bottomNavigationBar: Container(
+        height: MediaQuery.of(context).size.height / 10,
+        decoration: const BoxDecoration(
+            color: Colors.amberAccent,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(45), topRight: Radius.circular(45))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextButton(
+                onPressed: () {
+                  setState(() {
+                    index=0;
+                  });
+                },
+                child: Text("Ekle")),
+                TextButton(
+                onPressed: () {
+                  setState(() {
+                    index=1;
+                  });
+                },
+                child: Text("Ekle")),
+                TextButton(
+                onPressed: () {
+                  setState(() {
+                    index=2;
+                  });
+                },
+                child: Text("Ekle"))
+          ],
+        ),
       ),
+      body: widgets[index],
     );
   }
 }
 
-/////////////////////////////////////////////////////////////////////
-class ClassicBottomNavigationBar extends StatefulWidget {
-  const ClassicBottomNavigationBar({
-    super.key,
-  });
 
-  @override
-  State<ClassicBottomNavigationBar> createState() =>
-      _ClassicBottomNavigationBarState();
-}
 
-class _ClassicBottomNavigationBarState
-    extends State<ClassicBottomNavigationBar> {
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
-    int currentIndex = 0;
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        //ontap fonksiyonun value değişkeni çalıştırılan navigationbar iteminin index numarasını ifade eder
-        onTap: (value) {
-          setState(() {
-            currentIndex = value;
-          });
-          if (value == 0) {
-            //Add iconu ile beraber çalışacak fonksiyonlar
-            print("Ekleme İşlemi Yapılıyor");
-          } else {
-            //person iconu ile  beraber çalışacak fonksiyonlar
-            print("Profile Gidiliyor");
-          }
-        },
-        //seçili olan indexi belirleyen özelliktir. ontap ile değiştirilebilir.
-        currentIndex: currentIndex,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: "Add",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
-          ),
-        ],
+    return const Scaffold(
+      backgroundColor: Colors.amber,
+    );
+  }
+}
 
-        /*Bu özellik, alt gezinme çubuğunun türünü belirlemek için kullanılır.
-      fixed türü ise, seçili öğenin simgesi
-      ve etiketinin büyüdüğü ve diğer öğelerin küçüldüğü bir alt
-      gezinme çubuğu oluşturur.*/
-        type: BottomNavigationBarType.fixed,
-        //backgroundColor: Bu özellik, alt gezinme çubuğunun arka plan rengini ayarlamak için kullanılır.
-        //selectedItemColor: Bu özellik, seçili öğenin rengini ayarlamak için kullanılır.
-        //unselectedItemColor: Bu özellik, seçili olmayan öğelerin rengini ayarlamak için kullanılır.
-        //elevation: Bu özellik, alt gezinme çubuğunun gölgelendirme miktarını ayarlamak için kullanılır.
-        //iconSize: Bu özellik, alt gezinme çubuğundaki simgelerin boyutunu ayarlamak için kullanılır.
-        //selectedLabelStyle: Bu özellik, seçili öğenin etiketinin stilini ayarlamak için kullanılır.
-        //unselectedLabelStyle: Bu özellik, seçili olmayan öğelerin etiketlerinin stilini ayarlamak için kullanılır.
-      ),
+
+
+class MyWidget2 extends StatelessWidget {
+  const MyWidget2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      backgroundColor: Colors.blueAccent,
+    );
+  }
+}
+
+class MyWidget3 extends StatelessWidget {
+  const MyWidget3({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      backgroundColor: Colors.orange,
     );
   }
 }
